@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: int_amenities_changelog_standardized
+    description: >
+      Standardizes semantically similar amenity values into common analytical
+      categories while retaining each listing's historical validity periods.
+      Compound source values may generate multiple standardized amenities.
+
+    columns:
+      - name: listing_id
+        description: Unique identifier for the rental listing.
+        data_tests:
+          - not_null
+
+      - name: amenity
+        description: Standardized amenity used to generate downstream boolean flags.
+        data_tests:
+          - not_null
+
+      - name: dbt_valid_from
+        description: Beginning of the amenity validity period.
+        data_tests:
+          - not_null
+
+      - name: dbt_valid_to
+        description: Inclusive end of the amenity validity period.
+        data_tests:
+          - not_null
+          

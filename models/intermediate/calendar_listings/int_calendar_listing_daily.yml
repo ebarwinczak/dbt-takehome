@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: int_calendar_listing_daily
+    description: >
+      Aggregates source calendar records to one row per listing and calendar
+      date. Consolidates availability, reservation information, nightly price,
+      and minimum and maximum stay requirements at the daily listing grain.
+
+    columns:
+      - name: listing_id
+        description: Unique identifier for the rental listing.
+        data_tests:
+          - not_null
+
+      - name: calendar_date
+        description: Calendar date represented by the daily listing record.
+        data_tests:
+          - not_null
+
+      - name: is_available
+        description: >
+          True only when all underlying calendar records for the listing and
+          date indicate that the listing is available.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [true, false]
+
+      - name: reservation_count
+        description: Number of distinct reservations associated with the listing and date.
+        data_tests:
+          - not_null
+
+      - name: reservation_ids
+        description: Array of distinct reservation IDs associated with the listing and date.
+
+      - name: nightly_price
+        description: Nightly price associated with the listing and date.
+
+      - name: minimum_nights
+        description: Minimum permitted stay for the listing and date.
+
+      - name: maximum_nights
+        description: Maximum permitted stay for the listing and date.
+        

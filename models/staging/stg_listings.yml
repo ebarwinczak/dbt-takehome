@@ -1,0 +1,94 @@
+version: 2
+
+models:
+  - name: stg_listings
+    description: >
+      Cleans and standardizes the raw listings data while preserving one row
+      per listing. Parses host location components, converts source fields to
+      analytical types, and parses host verification values into a list for
+      downstream transformation.
+
+    columns:
+      - name: listing_id
+        description: Unique identifier for the rental listing.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: listing_name
+        description: Name of the rental listing.
+
+      - name: host_id
+        description: Identifier for the host associated with the listing.
+        data_tests:
+          - not_null
+
+      - name: host_name
+        description: Name of the listing host.
+
+      - name: host_since
+        description: Date the host joined the platform.
+
+      - name: host_location
+        description: Cleaned original host-location value retained for traceability.
+
+      - name: host_city
+        description: City parsed from the host location when available.
+
+      - name: host_state
+        description: State parsed or standardized from host location when available.
+
+      - name: host_country
+        description: Country parsed or standardized from host location when available.
+
+      - name: host_neighborhood
+        description: Neighborhood associated with the listing record.
+
+      - name: property_type
+        description: Property type associated with the listing.
+
+      - name: is_entire_property
+        description: Whether the listing represents an entire property.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [true, false]
+
+      - name: is_private_room
+        description: Whether the listing represents a private room.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [true, false]
+
+      - name: accommodates_count
+        description: Maximum number of guests accommodated by the listing.
+
+      - name: bathroom_count
+        description: Number of bathrooms associated with the listing.
+
+      - name: bedrooms_count
+        description: Number of bedrooms associated with the listing.
+
+      - name: beds_count
+        description: Number of beds associated with the listing.
+
+      - name: price
+        description: Cleaned numeric listing-level price.
+
+      - name: review_count
+        description: Total number of reviews associated with the listing.
+
+      - name: first_review_date
+        description: Date of the listing's first review.
+
+      - name: last_review_date
+        description: Date of the listing's most recent review.
+
+      - name: review_scores_rating
+        description: Review score rating provided by the listings source.
+
+      - name: host_verifications_list
+        description: >
+          Parsed list of verification methods associated with the listing's host.
+          

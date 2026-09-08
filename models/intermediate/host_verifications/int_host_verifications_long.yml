@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: int_host_verifications_long
+    description: >
+      Explodes each listing's host verification list into one row per listing
+      and host verification value.
+
+    columns:
+      - name: listing_id
+        description: Unique identifier for the rental listing.
+        data_tests:
+          - not_null
+
+      - name: host_id
+        description: Identifier for the host associated with the listing.
+        data_tests:
+          - not_null
+
+      - name: host_verification
+        description: Individual host verification method.
+        data_tests:
+          - not_null
+          

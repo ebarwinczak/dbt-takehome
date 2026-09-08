@@ -1,0 +1,20 @@
+# Explicit seed types are used where DuckDB type inference is unreliable or where raw values require cleaning before conversion
+
+# - CALENDAR.RESERVATION_ID contains the literal string "NULL", so it is loaded as VARCHAR and cleaned/cast in staging
+# - LISTINGS.PRICE contains currency formatting such as "$", so it is loaded as VARCHAR and converted to numeric in staging
+# - no issue with AMENITIES_CHANGELOG, so not including here 
+
+# Types are declared in seeds folder to keep configuration close to the source files
+
+version: 2
+
+seeds:
+  - name: CALENDAR
+    config:
+      column_types:
+        RESERVATION_ID: VARCHAR
+  - name: LISTINGS
+    config:
+      column_types:
+        PRICE: VARCHAR
+        

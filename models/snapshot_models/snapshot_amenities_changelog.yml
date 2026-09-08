@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: snapshot_amenities_changelog
+    description: >
+      Reconstructs historical amenity validity periods from the supplied
+      amenities changelog. Each row represents one historical version of a
+      listing's complete amenity state. A snapshot remains valid through the
+      day before the next recorded change, while the most recent state remains
+      valid through the current date.
+
+    columns:
+      - name: snapshot_key
+        description: >
+          Unique identifier for an amenity snapshot, generated from listing_id
+          and the timestamp at which the snapshot became valid.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: listing_id
+        description: Unique identifier for the rental listing.
+        data_tests:
+          - not_null
+
+      - name: amenities_list
+        description: >
+          Complete list of amenities associated with the listing during the
+          corresponding validity period.
+
+      - name: dbt_valid_from
+        description: Date or timestamp at which the amenity snapshot became valid.
+        data_tests:
+          - not_null
+
+      - name: dbt_valid_to
+        description: Inclusive final date for which the amenity snapshot is valid.
+        data_tests:
+          - not_null
+          

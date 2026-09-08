@@ -1,0 +1,117 @@
+version: 2
+
+models:
+  - name: mart_listings_daily
+    description: >
+      Final analytics mart at one row per listing and calendar date. Combines
+      daily calendar and reservation metrics with listing and host attributes,
+      dynamic host verification flags, and the historical amenity state valid
+      on the corresponding calendar date.
+
+    columns:
+      - name: listing_id
+        description: Unique identifier for the rental listing.
+        data_tests:
+          - not_null
+
+      - name: calendar_date
+        description: Calendar date represented by the mart record.
+        data_tests:
+          - not_null
+
+      - name: is_available
+        description: Whether the listing is available on the corresponding date.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [true, false]
+
+      - name: reservation_count
+        description: Number of distinct reservations associated with the listing and date.
+        data_tests:
+          - not_null
+
+      - name: reservation_ids
+        description: Array of reservation identifiers associated with the listing and date.
+
+      - name: nightly_price
+        description: Nightly price for the listing on the corresponding date.
+
+      - name: minimum_nights
+        description: Minimum stay requirement on the corresponding date.
+
+      - name: maximum_nights
+        description: Maximum stay requirement on the corresponding date.
+
+      - name: listing_name
+        description: Name of the rental listing.
+
+      - name: host_id
+        description: Identifier for the host associated with the listing.
+
+      - name: host_name
+        description: Name of the listing host.
+
+      - name: host_since
+        description: Date the host joined the platform.
+
+      - name: host_location
+        description: Cleaned source host-location value retained for traceability.
+
+      - name: host_city
+        description: Parsed host city when available.
+
+      - name: host_state
+        description: Parsed or standardized host state when available.
+
+      - name: host_country
+        description: Parsed or standardized host country when available.
+
+      - name: host_neighborhood
+        description: Neighborhood associated with the listing record.
+
+      - name: property_type
+        description: Property type associated with the listing.
+
+      - name: is_entire_property
+        description: Whether the listing represents an entire property.
+
+      - name: is_private_room
+        description: Whether the listing represents a private room.
+
+      - name: accommodates_count
+        description: Maximum number of guests accommodated by the listing.
+
+      - name: bathroom_count
+        description: Number of bathrooms associated with the listing.
+
+      - name: bedrooms_count
+        description: Number of bedrooms associated with the listing.
+
+      - name: beds_count
+        description: Number of beds associated with the listing.
+
+      - name: listing_price
+        description: Listing-level price from the listings source.
+
+      - name: review_count
+        description: Number of reviews associated with the listing.
+
+      - name: first_review_date
+        description: Date of the listing's first review.
+
+      - name: last_review_date
+        description: Date of the listing's most recent review.
+
+      - name: review_scores_rating
+        description: Review score rating provided by the listings source.
+
+      - name: amenities_valid_from
+        description: >
+          Beginning of the historical amenity state matched to this calendar date.
+
+      - name: amenities_valid_to
+        description: >
+          Inclusive end of the historical amenity state matched to this calendar date.
+          

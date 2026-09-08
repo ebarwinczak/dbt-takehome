@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: stg_calendar
+    description: >
+      Cleans and standardizes the raw calendar data while preserving the source
+      grain prior to daily listing-level aggregation. Standardizes availability,
+      reservation identifiers, nightly price, and stay requirements.
+
+    columns:
+      - name: listing_id
+        description: Unique identifier for the rental listing.
+        data_tests:
+          - not_null
+
+      - name: calendar_date
+        description: Calendar date represented by the source record.
+        data_tests:
+          - not_null
+
+      - name: is_available
+        description: >
+          Boolean indicating whether the listing is available for booking for
+          the corresponding calendar record.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [true, false]
+
+      - name: reservation_id
+        description: >
+          Identifier for the reservation associated with the calendar record.
+          Null when no reservation is associated with the record.
+
+      - name: nightly_price
+        description: Nightly price associated with the calendar record.
+
+      - name: minimum_nights
+        description: Minimum number of nights permitted for the listing.
+
+      - name: maximum_nights
+        description: Maximum number of nights permitted for the listing.
+        

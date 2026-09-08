@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: stg_amenities_changelog
+    description: >
+      Cleans the raw amenities changelog seed and parses the amenities JSON
+      string into a DuckDB list. Preserves one row per listing amenity-change
+      event for downstream historical modeling.
+
+    columns:
+      - name: listing_id
+        description: Unique identifier for the rental listing.
+        data_tests:
+          - not_null
+
+      - name: change_at
+        description: Timestamp when the listing's amenity set changed.
+        data_tests:
+          - not_null
+
+      - name: amenities_list
+        description: >
+          Parsed list of amenities associated with the listing as of change_at.
+          

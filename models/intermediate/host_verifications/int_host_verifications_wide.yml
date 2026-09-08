@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: int_host_verifications_wide
+    description: >
+      Dynamically pivots distinct host verification methods into boolean
+      columns. Produces one row per listing and automatically creates new
+      verification columns when new values appear.
+
+    columns:
+      - name: listing_id
+        description: Unique identifier for the rental listing.
+        data_tests:
+          - not_null
+          - unique
+          

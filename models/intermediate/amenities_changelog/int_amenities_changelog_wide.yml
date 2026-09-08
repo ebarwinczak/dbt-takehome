@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: int_amenities_changelog_wide
+    description: >
+      Dynamically pivots standardized amenities into boolean columns while
+      retaining historical validity periods. Produces one row per listing and
+      historical amenity state. Additional amenity columns are automatically
+      created when new standardized amenities appear in the source data.
+
+    columns:
+      - name: listing_id
+        description: Unique identifier for the rental listing.
+        data_tests:
+          - not_null
+
+      - name: dbt_valid_from
+        description: Beginning of the amenity state represented by the row.
+        data_tests:
+          - not_null
+
+      - name: dbt_valid_to
+        description: Inclusive end of the amenity state represented by the row.
+        data_tests:
+          - not_null
+          

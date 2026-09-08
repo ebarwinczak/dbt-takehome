@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: int_amenities_changelog_long
+    description: >
+      Explodes each historical amenity list into one row per listing, amenity,
+      and validity period while preserving the listing-level historical
+      validity windows.
+
+    columns:
+      - name: listing_id
+        description: Unique identifier for the rental listing.
+        data_tests:
+          - not_null
+
+      - name: amenity
+        description: Individual amenity associated with the listing.
+        data_tests:
+          - not_null
+
+      - name: dbt_valid_from
+        description: Beginning of the amenity validity period.
+        data_tests:
+          - not_null
+
+      - name: dbt_valid_to
+        description: Inclusive end of the amenity validity period.
+        data_tests:
+          - not_null
+          

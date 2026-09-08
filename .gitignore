@@ -1,6 +1,7 @@
-
 target/
 dbt_packages/
 logs/
 .env
 *.duckdb
+*.duckdb.wal
+.DS_Store
