@@ -3,8 +3,11 @@
         materialized='table'
     )
 }}
-
+-- flag: could potentially make this incremental but would need to deal w potential for new cols being added
+-- could set append_new_columns for on_schema_change but new col values will be null for historical data, but we could fix this downstream
+-- data is small for this use case and a full rebuild is quick / cheap, so keeping as a table 
 -- get distinct list of amenities from int_amenities_standardized; these will become columns 
+-- could partition by dbt_valid_from and cluster by listing_id if data was larger 
 {% set amenities_query %}
 
     SELECT DISTINCT amenity

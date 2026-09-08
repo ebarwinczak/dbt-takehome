@@ -3,7 +3,7 @@
         materialized='table'
     )
 }}
-
+-- making a table so this isn't rerun every time int_listings is queried 
 {% set verifications_query %}
 
     SELECT DISTINCT host_verification
