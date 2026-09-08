@@ -7,15 +7,13 @@
 WITH initial_cleaning AS (
     SELECT 
         *, -- pull in all raw cols for now 
-        -- let's use our clean_string macro on the ID column, just in case there are scenarios where a blank consists of more than one space: 
-        {{ clean_string('ID') }} AS listing_id, -- doing this in this CTE bc we will filter out NULL listing_ids in final select 
         STR_SPLIT(COALESCE({{ clean_string('HOST_LOCATION') }}, ''), ', ') AS host_location_parts 
         
     FROM {{ ref('LISTINGS') }}
 )
 
 SELECT
-    CAST(listing_id AS INTEGER) AS listing_id,
+    ID AS listing_id,
     {{ clean_string('NAME') }} AS listing_name,
     HOST_ID AS host_id,
     {{ clean_string('HOST_NAME') }} AS host_name,
@@ -82,4 +80,4 @@ SELECT
     -- not including amenities here, as it's handled in amenites_changelog models and will be joined with listings downstream
 
 FROM initial_cleaning
-WHERE listing_id IS NOT NULL 
+WHERE ID IS NOT NULL 
