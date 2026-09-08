@@ -18,7 +18,7 @@ The mart combines daily availability and reservation information with listing at
 
 ---
 
-## Technology
+## Tech Stack 
 
 - dbt Core 1.12.3
 - dbt-duckdb 1.11.0
@@ -69,23 +69,17 @@ dbt_takehome/
 └── README.md
 ```
 
-Each model has an accompanying `.yml` file containing model and column documentation as well as applicable generic data tests.
-
 ---
 
 ## Data Pipeline
 
-The project follows a layered dbt architecture:
+The project follows a layered dbt architecture, transforming the three source datasets through staging and intermediate models before combining them in the final daily listings mart.
 
-```text
-Seeds
-  ↓
-Staging
-  ↓
-Snapshot / Intermediate Models
-  ↓
-Final Mart
-```
+### Data Lineage
+
+The diagram below shows the end-to-end transformation flow from the three source datasets through staging and intermediate models to the final `mart_listings_daily` dataset.
+
+![dbt project lineage](assets/dbt_lineage.png)
 
 ### Listings
 
