@@ -15,7 +15,7 @@ WITH initial_cleaning AS (
 )
 
 SELECT
-    listing_id,
+    CAST(listing_id AS INTEGER) AS listing_id,
     {{ clean_string('NAME') }} AS listing_name,
     HOST_ID AS host_id,
     {{ clean_string('HOST_NAME') }} AS host_name,
